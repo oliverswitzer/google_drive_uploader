@@ -26,3 +26,4 @@ google_drive_uploader-*.tar
 /tmp/
 
 .envrc
+client-secret.json

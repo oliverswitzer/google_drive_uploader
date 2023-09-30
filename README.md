@@ -1,21 +1,20 @@
 # GoogleDriveUploader
 
-**TODO: Add description**
+An elixir utility to help me upload files to google drive in bulk
 
-## Installation
+## Setup
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `google_drive_uploader` to your list of dependencies in `mix.exs`:
+1. Copy .envrc.sample to .envrc, fill out values. Client secret and client ID should be taken from an OAuth configuration you need to set up.
+2. Copy service account key `client-secret.json` into top level of directory. This is used by goth.
+3. Run `mix google_apis.auth https://www.googleapis.com/auth/drive` to retrieve your access token (will take you through oauth flow)
+   3b. Copy verification code from the `code` param in the redirect URL and paste it into the CLI prompt.
+   3c. Copy the access token value that you are then given.
+4. `iex -S mix`
 
-```elixir
-def deps do
-  [
-    {:google_drive_uploader, "~> 0.1.0"}
-  ]
-end
 ```
+conn = GoogleApi.Drive.V3.Connection.new(<ACCESS TOKEN GOES HERE>)
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/google_drive_uploader>.
+{:ok, %_{files: files}} = GoogleApi.Drive.V3.Api.Files.drive_files_list(conn)
 
+files |> Enum.map(&(Map.get(&1, :name)))
+```

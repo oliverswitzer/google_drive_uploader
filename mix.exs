@@ -14,6 +14,7 @@ defmodule GoogleDriveUploader.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
+      mod: {OliversGoogleDriveUploader.Application, []},
       extra_applications: [:logger]
     ]
   end
@@ -21,8 +22,11 @@ defmodule GoogleDriveUploader.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:google_api_drive, "~> 0.19.0"},
-      {:goth, "~> 1.2.0"}
+      {:google_apis, git: "https://github.com/googleapis/elixir-google-api"},
+      {:google_api_drive, "~> 0.25.1"},
+      {:csv, "~> 3.2"},
+      {:goth, "~> 1.3.0"},
+      {:oauth2, "~> 0.9"}
     ]
   end
 end
