@@ -24,6 +24,7 @@ google_drive_uploader-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+data
 
 .envrc
 client-secret.json
